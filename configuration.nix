@@ -181,6 +181,7 @@
       "navercloudplatform/tap/ncp-iam-authenticator"
       "netbirdio/tap/netbird"
       "nixpacks"
+      "node"
       "ollama"
       "openjdk@17"
       "opentofu"

@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }:
+{ config, lib, pkgs, user, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
@@ -21,6 +21,17 @@ in
   ];
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
+
+  # Pi ships on npm only, so there is nothing to put in home.packages or the
+  # Homebrew lists. Install it once, with the command Pi's own docs give.
+  # Home Manager activation runs after the Homebrew bundle, so brew's npm and
+  # its global prefix (/opt/homebrew) already exist by the time this runs.
+  # The guard keeps every later switch fast; upgrade Pi through Pi itself.
+  home.activation.installPi = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -e /opt/homebrew/bin/pi ]; then
+      run /opt/homebrew/bin/npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+    fi
+  '';
 
   programs.zsh = {
     enable = true;
