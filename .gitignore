@@ -20,9 +20,9 @@ result-*
 .no-mistakes/
 
 # agent tooling local state - never commit
-.claude/
-.recall/
-.serena/
+/.claude/
+/.recall/
+/.serena/
 
 # editor swap files
 *.swp
