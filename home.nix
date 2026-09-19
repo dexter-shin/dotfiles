@@ -64,6 +64,9 @@ in
       add = "git add .";
       push = "git push";
       pull = "git pull";
+      vi = "nvim";
+      vim = "nvim";
+      nvim = "nvim";
       m = "git switch main";
       cc = "claude --dangerously-skip-permissions";
       co = "codex --full-auto";
