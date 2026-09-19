@@ -15,6 +15,7 @@
     "npm:pi-web-access@0.14.0",
     "npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6",
     "npm:@dietrichgebert/ponytail",
-    "git:github.com/algal/pi-openai-server-compaction@8a3de2f3b0c178fdd6f73f2f94172dfc3943e466"
+    "git:github.com/algal/pi-openai-server-compaction@8a3de2f3b0c178fdd6f73f2f94172dfc3943e466",
+    "npm:compact-adviser@0.1.3"
   ]
 }
