@@ -3,18 +3,19 @@
     "brew-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1781226006,
-        "narHash": "sha256-w4ZTuOnhYiDxjaynrMTASzp802QblBWmo3wpB8wVN4Y=",
-        "owner": "Homebrew",
-        "repo": "brew",
-        "rev": "109191be4988470b51a60a5ef1998520aa24c01b",
-        "type": "github"
+        "lastModified": 1789661079,
+        "narHash": "sha256-geVTQ51PGZ1mLULM5k7wO7qt/6xenOR/YG8X7Q3eCaI=",
+        "ref": "refs/tags/7.0.4",
+        "rev": "edb70f031e4170c780799633a1226ff73e1077f4",
+        "shallow": true,
+        "type": "git",
+        "url": "https://github.com/Homebrew/brew.git"
       },
       "original": {
-        "owner": "Homebrew",
-        "ref": "6.0.1",
-        "repo": "brew",
-        "type": "github"
+        "ref": "refs/tags/7.0.4",
+        "shallow": true,
+        "type": "git",
+        "url": "https://github.com/Homebrew/brew.git"
       }
     },
     "home-manager": {
@@ -61,7 +62,9 @@
     },
     "nix-homebrew": {
       "inputs": {
-        "brew-src": "brew-src"
+        "brew-src": [
+          "brew-src"
+        ]
       },
       "locked": {
         "lastModified": 1781389246,
@@ -95,6 +98,7 @@
     },
     "root": {
       "inputs": {
+        "brew-src": "brew-src",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
