@@ -167,6 +167,24 @@ rather than left to arrive as some other formula's dependency.
 brew install --cask kunchenguid/tap/pi-launcher
 ```
 
+## omp
+
+[omp](https://omp.sh) is installed the same way, from its own installer:
+
+```sh
+curl -fsSL https://omp.sh/install | sh
+```
+
+It lands in `~/.local/bin`, which `home.sessionPath` puts on `PATH` so the
+binary does not depend on an unmanaged `~/.zprofile`. Installing it through
+npm is not an option: the package declares a `bun` engine, and the installer
+fetches a prebuilt binary instead.
+
+Both agent steps swallow their own failure and print what to rerun. The omp
+installer resolves its version through the unauthenticated GitHub API, which
+rate-limits, and Home Manager activation runs under `set -eu`, so letting
+either one fail hard would abort the switch partway through.
+
 Home Manager owns exactly two repository-authored Pi directories: `~/.pi/agent/themes` and `~/.pi/agent/extensions`. It also links `models.json` and `settings.json` as individual files. The local extension directory is for public, repository-authored extensions only - third-party package code never belongs there. Run `/reload` after editing a local extension or other Pi resources. The terminal-title extension shows a spinner while Pi is working, then a completion mark with the session name or current directory. The `rose-pine-moon` theme was authored clean-room from the public [Rosé Pine Moon palette](https://rosepinetheme.com/palette) and Pi's [public theme schema](https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json), not from a private or live theme file.
 
 ### Pi Calm

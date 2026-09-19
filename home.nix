@@ -22,14 +22,33 @@ in
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
 
-  # Pi ships on npm only, so there is nothing to put in home.packages or the
-  # Homebrew lists. Install it once, with the command Pi's own docs give.
-  # Home Manager activation runs after the Homebrew bundle, so brew's npm and
-  # its global prefix (/opt/homebrew) already exist by the time this runs.
-  # The guard keeps every later switch fast; upgrade Pi through Pi itself.
+  # omp installs itself here, and nothing else on PATH provides it.
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
+  # Neither agent CLI is in Nixpkgs or Homebrew. Pi is published on npm only;
+  # omp ships a prebuilt binary from its own installer and its npm package
+  # declares a bun engine, so npm is not an option for it either. Both steps
+  # run the vendor's own documented command, once, guarded on the binary
+  # already being there - so later switches cost nothing and no version is
+  # pinned here. Upgrade each through itself.
+  #
+  # Activation runs under `set -eu -o pipefail` with a Nix-only PATH, so each
+  # step brings the tools it needs and swallows its own failure. A flaky
+  # network must not abort the switch and leave a half-applied generation:
+  # /run/current-system is only repointed after every activation step.
   home.activation.installPi = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -e /opt/homebrew/bin/pi ]; then
-      run /opt/homebrew/bin/npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+      run bash -c 'export PATH=/opt/homebrew/bin:$PATH; npm install -g --ignore-scripts @earendil-works/pi-coding-agent' \
+        || warnEcho "Pi install failed. Rerun by hand: npm install -g --ignore-scripts @earendil-works/pi-coding-agent"
+    fi
+  '';
+
+  # The installer resolves its version through the unauthenticated GitHub API,
+  # which rate-limits, so this is the likelier of the two to need a retry.
+  home.activation.installOmp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -e "$HOME/.local/bin/omp" ]; then
+      run bash -c 'export PATH=${pkgs.curl}/bin:$PATH; curl -fsSL https://omp.sh/install | sh' \
+        || warnEcho "omp install failed. Rerun by hand: curl -fsSL https://omp.sh/install | sh"
     fi
   '';
 
