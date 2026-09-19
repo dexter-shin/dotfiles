@@ -17,3 +17,11 @@ result-*
 
 # no-mistakes local validation state - never commit in this public repo
 .no-mistakes/
+
+# agent tooling local state - never commit
+.claude/
+.recall/
+.serena/
+
+# editor swap files
+*.swp
