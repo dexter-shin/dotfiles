@@ -3,7 +3,7 @@
     "blockImages": false
   },
   "terminal": {
-    "showImages": false
+    "showImages": true
   },
   "hideThinkingBlock": true,
   "quietStartup": true,
@@ -17,5 +17,8 @@
     "npm:@dietrichgebert/ponytail",
     "git:github.com/algal/pi-openai-server-compaction@8a3de2f3b0c178fdd6f73f2f94172dfc3943e466",
     "npm:compact-adviser@0.1.3"
-  ]
+  ],
+  "lastChangelogVersion": "0.86.1",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-terra"
 }

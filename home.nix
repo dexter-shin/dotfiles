@@ -22,8 +22,8 @@ in
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
 
-  # omp installs itself here, and nothing else on PATH provides it.
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  # omp installs itself in .local; Kimi Code in .kimi-code; Grok in .grok.
+  home.sessionPath = [ "$HOME/.local/bin" "$HOME/.kimi-code/bin" "$HOME/.grok/bin" ];
 
   # Neither agent CLI is in Nixpkgs or Homebrew. Pi is published on npm only;
   # omp ships a prebuilt binary from its own installer and its npm package
@@ -49,6 +49,20 @@ in
     if [ ! -e "$HOME/.local/bin/omp" ]; then
       run bash -c 'export PATH=${pkgs.curl}/bin:$PATH; curl -fsSL https://omp.sh/install | sh' \
         || warnEcho "omp install failed. Rerun by hand: curl -fsSL https://omp.sh/install | sh"
+    fi
+  '';
+
+  home.activation.installKimi = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -e "$HOME/.kimi-code/bin/kimi" ]; then
+      run bash -c 'export PATH=${pkgs.curl}/bin:$PATH; curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash' \
+        || warnEcho "Kimi Code install failed. Rerun by hand: curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash"
+    fi
+  '';
+
+  home.activation.installGrok = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -e "$HOME/.grok/bin/grok" ]; then
+      run bash -c 'export PATH=${pkgs.curl}/bin:$PATH SHELL=/bin/sh; curl -fsSL https://x.ai/cli/install.sh | bash' \
+        || warnEcho "Grok install failed. Rerun by hand: curl -fsSL https://x.ai/cli/install.sh | bash"
     fi
   '';
 
