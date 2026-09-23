@@ -25,10 +25,10 @@ in
   # omp installs itself in .local; Kimi Code in .kimi-code; Grok in .grok.
   home.sessionPath = [ "$HOME/.local/bin" "$HOME/.kimi-code/bin" "$HOME/.grok/bin" ];
 
-  # Neither agent CLI is in Nixpkgs or Homebrew. Pi is published on npm only;
-  # omp ships a prebuilt binary from its own installer and its npm package
-  # declares a bun engine, so npm is not an option for it either. Both steps
-  # run the vendor's own documented command, once, guarded on the binary
+  # Pi and Codex are published on npm only; omp ships a prebuilt binary from
+  # its own installer and its npm package declares a bun engine, so npm is not
+  # an option for it either. Each installer runs its vendor's documented
+  # command once, guarded on the binary
   # already being there - so later switches cost nothing and no version is
   # pinned here. Upgrade each through itself.
   #
@@ -43,8 +43,15 @@ in
     fi
   '';
 
+  home.activation.installCodex = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -e /opt/homebrew/bin/codex ]; then
+      run bash -c 'export PATH=/opt/homebrew/bin:$PATH; npm install -g @openai/codex' \
+        || warnEcho "Codex install failed. Rerun by hand: npm install -g @openai/codex"
+    fi
+  '';
+
   # The installer resolves its version through the unauthenticated GitHub API,
-  # which rate-limits, so this is the likelier of the two to need a retry.
+  # which rate-limits, so this is the likelier installer to need a retry.
   home.activation.installOmp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -e "$HOME/.local/bin/omp" ]; then
       run bash -c 'export PATH=${pkgs.curl}/bin:$PATH; curl -fsSL https://omp.sh/install | sh' \
