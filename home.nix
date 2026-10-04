@@ -297,6 +297,42 @@ in
     lib.concatMapStrings installOne plugins
   );
 
+  # VS Code extensions I installed by hand. Settings stay unmanaged: the live
+  # settings.json holds API keys and this repo is public. Same contract as
+  # above: install only what is missing, VS Code keeps them updated.
+  # The `code` CLI hangs (no output, no exit) until the app has been opened
+  # once to clear Gatekeeper quarantine, so probe it with a timeout first.
+  home.activation.installVscodeExtensions = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      code = "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code";
+      timeout = "${pkgs.coreutils}/bin/timeout";
+      extensions = [
+        "gitlab.gitlab-workflow"
+        "ms-azuretools.vscode-containers"
+        "ms-vscode-remote.remote-containers"
+        "ms-vscode.live-server"
+        "tomoki1207.pdf"
+      ];
+      installOne = e: ''
+          if ! compgen -G "$HOME/.vscode/extensions/${e}-[0-9]*" >/dev/null; then
+            run ${timeout} 300 ${lib.escapeShellArg code} --install-extension ${e} \
+              || warnEcho "VS Code extension ${e} failed to install. Rerun by hand: code --install-extension ${e}"
+          fi
+      '';
+    in
+    ''
+      if [ -x ${lib.escapeShellArg code} ]; then
+        if ${timeout} 30 ${lib.escapeShellArg code} --version >/dev/null 2>&1; then
+    ''
+    + lib.concatMapStrings installOne extensions
+    + ''
+        else
+          warnEcho "VS Code CLI is not responding. Open VS Code once, then rerun the switch to install its extensions"
+        fi
+      fi
+    ''
+  );
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;      # ghost text from history

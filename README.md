@@ -30,6 +30,7 @@ Running the switch builds:
 - Python CLIs (serena, chunkhound, headroom, markitdown, ansible, basedpyright and more) through `uv tool install`, installed once if missing and never pinned
 - Go CLIs (gopls, dlv, staticcheck and the other Go editor tools, actionlint, songsee) through `go install`, and Rust CLIs (cargo-watch, sqlx-cli, rhwp) through `cargo install`, installed once if missing and never pinned
 - kubectl plugins (access-matrix, konfig, neat, slice) through Homebrew's krew, installed once if missing, with `~/.krew/bin` on PATH so `kubectl <plugin>` finds them
+- VS Code extensions (GitLab Workflow, Containers, Dev Containers, Live Server, PDF), installed once if missing. On a fresh machine, open VS Code once before the switch can install them, because its CLI doesn't respond until Gatekeeper has approved the app. VS Code settings are not managed
 - Agent and dev CLIs that ship their own curl installer (goose, cursor-agent, herdr, ak, gjc, plannotator, treehouse, no-mistakes, the Notion CLI ntn), installed once if missing and never pinned
 - Shell (zsh, aliases, starship prompt)
 - Editor (Neovim config with the rose-pine moon theme)
