@@ -33,7 +33,7 @@ Running the switch builds:
 - kubectl plugins (access-matrix, konfig, neat, slice) through Homebrew's krew, installed once if missing, with `~/.krew/bin` on PATH so `kubectl <plugin>` finds them
 - VS Code extensions (GitLab Workflow, Containers, Dev Containers, Live Server, PDF), installed once if missing. On a fresh machine, open VS Code once before the switch can install them, because its CLI doesn't respond until Gatekeeper has approved the app. VS Code settings are not managed
 - Agent and dev CLIs that ship their own curl installer (goose, cursor-agent, herdr, ak, gjc, plannotator, treehouse, no-mistakes, the Notion CLI ntn), installed once if missing and never pinned
-- Shell (zsh, aliases, starship prompt)
+- Shell (zsh, aliases, starship prompt). `~/.zprofile` is managed too: it keeps the OrbStack (`docker`) and Obsidian (`obsidian`) CLI PATH lines those apps add on first launch, and the switch moves any existing hand-edited copy to `~/.zprofile.bak`
 - Editor (Neovim config with the rose-pine moon theme)
 - Terminal (WezTerm config with the rose-pine moon theme and dimmed unfocused windows)
 - Ghostty config (D2Coding Nerd Font, Catppuccin theme that follows system dark mode, quick terminal on Cmd+`)

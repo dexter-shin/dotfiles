@@ -346,6 +346,15 @@ in
     initContent = ''
       bindkey '^f' autosuggest-accept
     '';
+    # The lines OrbStack and Obsidian append to ~/.zprofile on first launch,
+    # kept verbatim so the apps see them and don't try to rewrite this file.
+    # Both append to PATH: OrbStack's docker CLI lives only in ~/.orbstack/bin
+    # (its kubectl must not shadow Homebrew's); Obsidian's `obsidian` CLI is
+    # the app binary itself. Homebrew's own PATH comes from nix-homebrew.
+    profileExtra = ''
+      source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+      export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+    '';
     shellAliases = {
       ".." = "cd ..";
       add = "git add .";
