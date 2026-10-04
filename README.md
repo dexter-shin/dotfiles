@@ -34,6 +34,8 @@ Running the switch builds:
 - Shell (zsh, aliases, starship prompt)
 - Editor (Neovim config with the rose-pine moon theme)
 - Terminal (WezTerm config with the rose-pine moon theme and dimmed unfocused windows)
+- Ghostty config (D2Coding Nerd Font, Catppuccin theme that follows system dark mode, quick terminal on Cmd+`)
+- tmux config (Ctrl-Space prefix, catppuccin, resurrect/continuum session restore). TPM comes from Homebrew, and the first tmux start installs the plugins
 - Agent configs (Claude, Codex, opencode all share one AGENTS.md)
 - Optional Pi theme and local extensions, generic UI settings and model overrides, plus two deliberately pinned third-party Pi packages
 

@@ -1,0 +1,59 @@
+# ── Font ────────────────────────────────────────────────
+font-family = "D2CodingLigature Nerd Font Mono"
+font-size = 13
+font-thicken = true
+font-thicken-strength = 40
+adjust-cell-height = 10%
+adjust-icon-height = -10%
+grapheme-width-method = unicode
+
+# ── Theme (시스템 다크/라이트 자동 전환) ─────────────────
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+
+# ── Window ──────────────────────────────────────────────
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+window-decoration = auto
+window-theme = auto
+window-vsync = true
+window-colorspace = srgb
+
+# ── Cursor ──────────────────────────────────────────────
+cursor-style = bar
+cursor-style-blink = true
+cursor-click-to-move = true
+
+# ── Scrollback & Clipboard ──────────────────────────────
+scrollback-limit = 50000000
+clipboard-read = ask
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+clipboard-paste-bracketed-safe = true
+copy-on-select = true
+
+# ── Mouse ───────────────────────────────────────────────
+mouse-hide-while-typing = true
+
+# ── Links ───────────────────────────────────────────────
+link-url = true
+
+# ── Shell Integration ───────────────────────────────────
+shell-integration = detect
+shell-integration-features = cursor,sudo,title,ssh-env
+
+# ── Quick Terminal (Cmd+`) ──────────────────────────────
+quick-terminal-position = top
+quick-terminal-animation-duration = 0.2
+quick-terminal-autohide = true
+keybind = global:super+grave_accent=toggle_quick_terminal
+
+# ── Keybinds ────────────────────────────────────────────
+# 프롬프트 간 점프 (Claude Code 긴 출력 탐색용)
+keybind = super+shift+arrow_up=jump_to_prompt:-1
+keybind = super+shift+arrow_down=jump_to_prompt:1
+# 전체화면 토글
+keybind = super+enter=toggle_fullscreen
+
+working-directory = ~/cc

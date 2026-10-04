@@ -241,6 +241,7 @@
       "warrensbox/tap/tgswitch"
       "timewarrior"
       "tmux"
+      "tpm"
       "trivy"
       "tty-clock"
       "util-linux"
