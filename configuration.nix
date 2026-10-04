@@ -294,5 +294,32 @@
       "warp"
       "wezterm"
     ];
+    # Mac App Store apps, keyed by display name. IDs come from `mas list`.
+    # cleanup = "zap" never removes these, so drop an app by uninstalling it too.
+    masApps = {
+      "Amphetamine" = 937984704;
+      "Canva" = 897446215;
+      "Citrix Secure Access" = 1338991513;
+      "Desk Remote Control" = 1509037746;
+      "GarageBand" = 682658836;
+      "Hancom Office HWP Viewer" = 416746898;
+      "iMovie" = 408981434;
+      "KakaoTalk" = 869223134;
+      "Keka" = 470158793;
+      "Keynote" = 361285480;
+      "LINE" = 539883307;
+      "Microsoft Remote Desktop" = 1295203466;
+      "Numbers" = 409203825;
+      "Pages" = 409201541;
+      "Perplexity" = 6714467650;
+      "ScreenBrush" = 1233965871;
+      "Session" = 1521432881;
+      "SuperCut" = 6784451245;
+      "The Unarchiver" = 425424353;
+      "Turbo VPN" = 1493508424;
+      "WhatsApp" = 310633997;
+      "WireGuard" = 1451685025;
+      "Xcode" = 497799835;
+    };
   };
 }
