@@ -343,8 +343,15 @@ in
     enable = true;
     autosuggestion.enable = true;      # ghost text from history
     syntaxHighlighting.enable = true;  # commands turn green when valid
+    # The hooks my hand-written .zshrc ran before home-manager took it over:
+    # `z` jumps (zoxide), Ctrl-R/Ctrl-T/Alt-C (fzf) and per-directory .envrc
+    # loading (direnv). The binaries are the declared Homebrew zoxide/direnv
+    # formulae and the fzf in home.packages.
     initContent = ''
       bindkey '^f' autosuggest-accept
+      eval "$(zoxide init zsh)"
+      source <(fzf --zsh)
+      eval "$(direnv hook zsh)"
     '';
     # The lines OrbStack and Obsidian append to ~/.zprofile on first launch,
     # kept verbatim so the apps see them and don't try to rewrite this file.
