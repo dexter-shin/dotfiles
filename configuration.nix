@@ -261,6 +261,8 @@
     # gets taken over in place. Adoption only works when the cask auto-updates or its
     # version matches the installed app, otherwise the cask install fails.
     # Fonts in ~/Library/Fonts are adopted only when the file is byte-identical.
+    # pkg-based casks (zoom, microsoft-*, karabiner-elements, ...) have nothing to
+    # adopt: their installer runs again over the existing app and asks for sudo.
     casks = [
       "1password"
       "1password-cli"
@@ -286,6 +288,7 @@
       "dropbox"
       "elgato-capture-device-utility"
       "elgato-control-center"
+      "elgato-stream-deck"
       "figma"
       "font-azonix"
       "font-d2coding-nerd-font"
@@ -302,19 +305,28 @@
       "gcloud-cli"
       "ghostty"
       "google-chrome"
+      "google-drive"
       "grok-bot"
       "hop"
       "hyperwhisper"
+      "imaging-edge"
       "imazing"
+      "insta360-link-controller"
+      "insta360-studio"
       "intellij-idea"
       "iterm2"
       "itermai"
+      "karabiner-elements"
       "kitty"
       "libreoffice"
       "linear"
+      "logi-options+"
       "loom"
       "maccy"
       "macfuse"
+      "microsoft-excel"
+      "microsoft-powerpoint"
+      "microsoft-word"
       "monologue"
       "ngrok"
       "notion"
@@ -329,6 +341,7 @@
       "orca"
       "paper-design"
       "parallels@20"
+      "philips-hue-sync"
       "raycast"
       "screen-studio"
       "screenflow"
@@ -338,6 +351,7 @@
       "slack-cli"
       "spotify"
       "superwhisper"
+      "tailscale-app"
       "telegram"
       "temurin"
       "tfswitch"
@@ -355,6 +369,7 @@
       "yes24-ebook"
       "zcode"
       "zed"
+      "zoom"
     ];
     # Mac App Store apps, keyed by display name. IDs come from `mas list`.
     # cleanup = "zap" never removes these, so drop an app by uninstalling it too.
