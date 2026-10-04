@@ -480,4 +480,27 @@
       "Xcode" = 497799835;
     };
   };
+  # The NetBird client daemon, as `sudo netbird service install` writes it.
+  # Keeping the label and arguments identical means `netbird service
+  # start/stop/status` and `netbird up` keep working against this plist.
+  launchd.daemons.netbird.serviceConfig = {
+    Label = "netbird";
+    ProgramArguments = [
+      "/opt/homebrew/bin/netbird"
+      "service"
+      "run"
+      "--log-level"
+      "info"
+      "--daemon-addr"
+      "unix:///var/run/netbird.sock"
+      "--log-file"
+      "/var/log/netbird/client.log"
+    ];
+    Disabled = false;
+    KeepAlive = true;
+    RunAtLoad = false;
+    SessionCreate = false;
+    StandardErrorPath = "/var/log/netbird.err.log";
+    StandardOutPath = "/var/log/netbird.out.log";
+  };
 }
