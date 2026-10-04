@@ -19,11 +19,36 @@
       InitialKeyRepeat = 15;  # short delay before repeat
       _HIHideMenuBar = true;  # auto-hide the menu bar
       AppleShowAllExtensions = true;
+      ApplePressAndHoldEnabled = false;    # key repeat instead of the accent popup
+      NSAutomaticSpellingCorrectionEnabled = false;
+      NSAutomaticCapitalizationEnabled = false;
+      NSAutomaticPeriodSubstitutionEnabled = false;  # no "." on double space
+      "com.apple.trackpad.scaling" = 3.0;  # fastest trackpad tracking
     };
     dock.autohide = true;
+    dock.tilesize = 16;
+    dock.mru-spaces = false;               # keep Spaces in a fixed order
+    dock.minimize-to-application = true;
+    dock.wvous-bl-corner = 2;              # hot corner: Mission Control
+    dock.wvous-br-corner = 11;             # hot corner: Launchpad
     finder.FXPreferredViewStyle = "Nlsv";  # list view by default
     finder.CreateDesktop = false;          # clean desktop
+    finder.AppleShowAllFiles = true;       # show hidden files
+    finder.ShowPathbar = true;
+    finder.ShowStatusBar = true;
+    finder._FXSortFoldersFirst = true;
+    finder.FXDefaultSearchScope = "SCcf";  # search the current folder
+    finder.NewWindowTarget = "Home";
     trackpad.Clicking = true;              # tap to click
+    screencapture.show-thumbnail = false;  # save screenshots without the preview delay
+    # Turn off macOS edge-drag window tiling.
+    WindowManager.EnableTilingByEdgeDrag = false;
+    WindowManager.EnableTopTilingByEdgeDrag = false;
+    WindowManager.EnableTiledWindowMargins = false;
+    CustomUserPreferences."com.apple.desktopservices" = {
+      DSDontWriteNetworkStores = true;     # no .DS_Store on network shares
+      DSDontWriteUSBStores = true;         # or on USB drives
+    };
   };
   nix-homebrew = {
     enable = true;
