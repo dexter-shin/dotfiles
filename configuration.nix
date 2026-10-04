@@ -260,6 +260,7 @@
     # brew bundle passes --adopt, so a hand-installed app already in /Applications
     # gets taken over in place. Adoption only works when the cask auto-updates or its
     # version matches the installed app, otherwise the cask install fails.
+    # Fonts in ~/Library/Fonts are adopted only when the file is byte-identical.
     casks = [
       "1password"
       "1password-cli"
@@ -289,8 +290,13 @@
       "font-azonix"
       "font-d2coding-nerd-font"
       "font-fira-code"
+      "font-gmarket-sans"
       "font-hack-nerd-font"
       "font-jetbrains-mono-nerd-font"
+      "font-meslo-for-powerlevel10k"
+      "font-nanum-square"
+      "font-nanum-square-neo"
+      "font-nanum-square-round"
       "font-space-grotesk"
       "freelens"
       "gcloud-cli"

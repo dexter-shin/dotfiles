@@ -24,7 +24,7 @@ If you find a bug, please open a GitHub Issue using the bug report template.
 Running the switch builds:
 
 - System settings (dark mode, key repeat, dock, Finder, trackpad)
-- Homebrew apps (casks and CLI tools) and Mac App Store apps. When an app from `casks` is already in `/Applications`, `brew bundle` adopts it instead of installing it again
+- Homebrew apps (casks and CLI tools), fonts (Korean and Nerd Fonts) and Mac App Store apps. When an app from `casks` is already in `/Applications`, or an identical font file is already in `~/Library/Fonts`, `brew bundle` adopts it instead of installing it again
 - Nix user packages (ripgrep, fd, fzf, jq, lazygit, Neovim, Hack Nerd Font)
 - Global npm CLIs (agent CLIs, *-axi tools, Pi extensions, language servers), installed once if missing and never pinned
 - Python CLIs (serena, chunkhound, headroom, markitdown, ansible and more) through `uv tool install`, installed once if missing and never pinned
