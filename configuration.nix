@@ -446,6 +446,7 @@
       "font-nanum-square-neo"
       "font-nanum-square-round"
       "font-pretendard"
+      "font-sf-mono"
       "font-sketchybar-app-font"
       "font-space-grotesk"
       "freelens"
