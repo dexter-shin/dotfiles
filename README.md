@@ -43,7 +43,7 @@ Running the switch builds:
 - Karabiner-Elements config (Caps Lock -> F18, Esc -> international1 on one external keyboard)
 - yabai, skhd and sketchybar configs (bsp tiling with float rules, vim-style alt/shift focus, swap and resize keys, a minimal status bar). Homebrew installs the tools, but none of them start until you run `yabai --start-service`, `skhd --start-service` or `brew services start sketchybar`
 - tmux config (Ctrl-Space prefix, catppuccin, resurrect/continuum session restore). TPM comes from Homebrew, and the first tmux start installs the plugins
-- Agent configs (Claude, Codex, opencode all share one AGENTS.md)
+- Agent configs (Claude, Codex, opencode all share one AGENTS.md). Claude Code settings also carry the env vars the old hand-written ~/.zshrc exported: telemetry and error reporting off, a 20-minute API timeout, 64k max output tokens, 30k max MCP output tokens, and Bash staying in the project directory
 - Optional Pi theme and local extensions, generic UI settings and model overrides, plus two deliberately pinned third-party Pi packages
 
 ## Prerequisites
