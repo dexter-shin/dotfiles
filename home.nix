@@ -340,6 +340,11 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr";
   home.file.".claude/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.claude/settings.json";
+  # gh/glab `auth setup-git` write credential helpers through this link into the repo.
+  home.file.".gitconfig".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.gitconfig";
+  home.file.".config/git/ignore".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/git/ignore";
 
   # Keep Pi's credential and runtime state local by linking only authored files and directories.
   home.file.".pi/agent/themes".source =

@@ -150,6 +150,10 @@ The files under `home/` are the real files - editing them here is editing your l
 `home.nix` uses `mkOutOfStoreSymlink` to point paths like `~/.config/nvim` straight at `home/.config/nvim` in this repo, so the two never drift out of sync.
 You only run `./rebuild.sh` when you change something that isn't just a symlinked file, like a package list or a system default.
 
+`~/.gitconfig` and the global ignore file `~/.config/git/ignore` are linked the same way.
+Commands like `gh auth setup-git` write through the link, so their changes show up as a diff in this repo.
+Change `[user]` in `home/.gitconfig` to your own name and email before you switch.
+
 ## Pi configuration
 
 Pi is published on npm only, so there is nothing for Nixpkgs or Homebrew to

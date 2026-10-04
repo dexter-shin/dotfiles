@@ -1,0 +1,28 @@
+[user]
+	name = Dexter
+	email = dexter@infograb.net
+[init]
+	defaultBranch = main
+[core]
+#	quotepath = false
+	editor = vim
+	excludesfile = ~/.config/git/ignore
+[rerere]
+	enabled = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[color]
+	ui = auto
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
+[credential "https://gitlab.com"]
+	helper = !/opt/homebrew/bin/glab-axi auth git-credential
