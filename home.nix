@@ -125,6 +125,12 @@ in
         "headroom-ai"
         "gnhf"
         "backpass"
+        # once installed only under an nvm Node that is not on PATH: zg backs
+        # the zvec_grep MCP server, ocx the opencodex provider proxy, omo the
+        # OMO harness
+        "@zvec/zvec-grep"
+        "@bitkyc08/opencodex"
+        "omo-ai"
         # agent-ergonomic CLI wrappers
         "chrome-devtools-axi"
         "cloudflare-axi"

@@ -26,7 +26,7 @@ Running the switch builds:
 - System settings (dark mode, key repeat, dock, Finder, trackpad)
 - Homebrew apps (casks and CLI tools), fonts (Korean and Nerd Fonts) and Mac App Store apps. When an app from `casks` is already in `/Applications`, or an identical font file is already in `~/Library/Fonts`, `brew bundle` adopts it instead of installing it again. Apps that ship as a `.pkg` (Zoom, Microsoft Office, Karabiner-Elements, Tailscale, Google Drive and others) can't be adopted, so their installer runs again over the existing app and asks for your password
 - Nix user packages (ripgrep, fd, fzf, jq, lazygit, Neovim, Hack Nerd Font)
-- Global npm CLIs (agent CLIs, *-axi tools, Pi extensions, language servers), installed once if missing and never pinned
+- Global npm CLIs (agent CLIs, *-axi tools, Pi extensions, language servers, plus zg, ocx and omo that once lived only under nvm), installed once into Homebrew Node if missing and never pinned
 - Python CLIs (serena, chunkhound, headroom, markitdown, ansible, basedpyright and more) through `uv tool install`, installed once if missing and never pinned
 - Go CLIs (gopls, dlv, staticcheck and the other Go editor tools, actionlint, songsee) through `go install`, and Rust CLIs (cargo-watch, sqlx-cli, rhwp) through `cargo install`, installed once if missing and never pinned
 - kubectl plugins (access-matrix, konfig, neat, slice) through Homebrew's krew, installed once if missing, with `~/.krew/bin` on PATH so `kubectl <plugin>` finds them
