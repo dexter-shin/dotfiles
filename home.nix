@@ -67,6 +67,37 @@ in
     fi
   '';
 
+  # Other CLIs I installed by hand with their vendor's curl installer. Same
+  # contract as above: run the documented one-liner only when the binary is
+  # missing, never pin, upgrade through each tool's own updater. ~/.local/bin
+  # is put on PATH because some installers pick it only when it is there and
+  # fall back to /usr/local/bin (sudo) otherwise.
+  home.activation.installVendorClis = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      # bin: the file that proves it is installed. cmd: the vendor one-liner.
+      tools = [
+        { bin = ".local/bin/goose"; cmd = "curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | CONFIGURE=false bash"; }
+        # Also links ~/.local/bin/agent, which Grok's installer claims too.
+        { bin = ".local/bin/cursor-agent"; cmd = "curl -fsSL https://cursor.com/install | bash"; }
+        { bin = ".local/bin/herdr"; cmd = "curl -fsSL https://herdr.dev/install.sh | sh"; }
+        { bin = ".local/bin/ak"; cmd = "curl -fsSL https://agentkit.best/install.sh | sh"; }
+        { bin = ".local/bin/gjc"; cmd = "curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/gajae-code/main/scripts/install.sh | sh"; }
+        { bin = ".local/bin/plannotator"; cmd = "curl -fsSL https://plannotator.ai/install.sh | bash -s -- --non-interactive"; }
+        # Resolves its version through the unauthenticated GitHub API, so it
+        # is the one most likely to need a rerun when that rate-limits.
+        { bin = ".local/bin/treehouse"; cmd = "curl -fsSL https://kunchenguid.github.io/treehouse/install.sh | sh"; }
+        { bin = ".no-mistakes/bin/no-mistakes"; cmd = "curl -fsSL https://raw.githubusercontent.com/kunchenguid/no-mistakes/main/docs/install.sh | sh"; }
+      ];
+      installOne = t: ''
+        if [ ! -e "$HOME/${t.bin}" ]; then
+          run bash -c 'export PATH=${pkgs.curl}/bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin SHELL=/bin/sh; mkdir -p "$HOME/.local/bin"; '${lib.escapeShellArg t.cmd} \
+            || warnEcho ${lib.escapeShellArg "${baseNameOf t.bin} install failed. Rerun by hand: ${t.cmd}"}
+        fi
+      '';
+    in
+    lib.concatMapStrings installOne tools
+  );
+
   # Global npm CLIs I installed by hand over time: agent CLIs, *-axi tools,
   # Pi extensions and language servers. Same contract as Pi above: install
   # only what is missing, never pin, upgrade through npm itself. Each package
