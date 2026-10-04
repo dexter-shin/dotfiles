@@ -399,6 +399,8 @@ in
       ggmini = "gemini --yolo";
       fabric = "fabric-ai";
       omc = "omc --dangerously-skip-permissions";
+      # granted's `assume` must be sourced to export AWS creds into this shell.
+      assume = ". assume";
     };
   };
 
