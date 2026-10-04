@@ -28,6 +28,7 @@ Running the switch builds:
 - Nix user packages (ripgrep, fd, fzf, jq, lazygit, Neovim, Hack Nerd Font)
 - Global npm CLIs (agent CLIs, *-axi tools, Pi extensions, language servers), installed once if missing and never pinned
 - Python CLIs (serena, chunkhound, headroom, markitdown, ansible and more) through `uv tool install`, installed once if missing and never pinned
+- Go CLIs (gopls, dlv, staticcheck and the other Go editor tools, actionlint, songsee) through `go install`, and Rust CLIs (cargo-watch, sqlx-cli, rhwp) through `cargo install`, installed once if missing and never pinned
 - Shell (zsh, aliases, starship prompt)
 - Editor (Neovim config with the rose-pine moon theme)
 - Terminal (WezTerm config with the rose-pine moon theme and dimmed unfocused windows)

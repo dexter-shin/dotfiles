@@ -22,8 +22,9 @@ in
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
 
-  # omp installs itself in .local; Kimi Code in .kimi-code; Grok in .grok.
-  home.sessionPath = [ "$HOME/.local/bin" "$HOME/.kimi-code/bin" "$HOME/.grok/bin" ];
+  # omp installs itself in .local; Kimi Code in .kimi-code; Grok in .grok;
+  # `go install` in ~/go/bin.
+  home.sessionPath = [ "$HOME/.local/bin" "$HOME/.kimi-code/bin" "$HOME/.grok/bin" "$HOME/go/bin" ];
 
   # Neither agent CLI is in Nixpkgs or Homebrew. Pi is published on npm only;
   # omp ships a prebuilt binary from its own installer and its npm package
@@ -180,6 +181,57 @@ in
         if [ ! -e "$HOME/.local/bin/${t.bin}" ]; then
           run bash -c 'export PATH=/opt/homebrew/bin:$PATH; uv tool install "$@"' _ ${lib.escapeShellArgs t.args} \
             || warnEcho "uv tool install ${lib.concatStringsSep " " t.args} failed. Rerun it by hand"
+        fi
+      '';
+    in
+    lib.concatMapStrings installOne tools
+  );
+
+  # Go CLIs I installed by hand with `go install`: the editor tools the Go
+  # extension asks for, plus actionlint and songsee. They stay in ~/go/bin,
+  # where editors look for them. Same contract as above: install only what is
+  # missing, never pin, upgrade by rerunning `go install <path>@latest`.
+  home.activation.installGoTools = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      # bin: the executable in ~/go/bin. path: the `go install` package path.
+      tools = [
+        { bin = "gopls"; path = "golang.org/x/tools/gopls"; }
+        { bin = "dlv"; path = "github.com/go-delve/delve/cmd/dlv"; }
+        { bin = "staticcheck"; path = "honnef.co/go/tools/cmd/staticcheck"; }
+        { bin = "gomodifytags"; path = "github.com/fatih/gomodifytags"; }
+        { bin = "gotests"; path = "github.com/cweill/gotests/gotests"; }
+        { bin = "impl"; path = "github.com/josharian/impl"; }
+        { bin = "goplay"; path = "github.com/haya14busa/goplay/cmd/goplay"; }
+        { bin = "go-outline"; path = "github.com/ramya-rao-a/go-outline"; }
+        { bin = "actionlint"; path = "github.com/rhysd/actionlint/cmd/actionlint"; }
+        { bin = "songsee"; path = "github.com/steipete/songsee/cmd/songsee"; }
+      ];
+      installOne = t: ''
+        if [ ! -e "$HOME/go/bin/${t.bin}" ]; then
+          run bash -c 'export PATH=/opt/homebrew/bin:$PATH; go install "$1@latest"' _ ${lib.escapeShellArg t.path} \
+            || warnEcho "go install ${t.path}@latest failed. Rerun it by hand"
+        fi
+      '';
+    in
+    lib.concatMapStrings installOne tools
+  );
+
+  # Rust CLIs I installed by hand with `cargo install`. They go to ~/.local/bin
+  # (--root ~/.local) rather than ~/.cargo/bin, because ~/.cargo/bin also holds
+  # an old rustup toolchain that must not shadow Homebrew's rust on PATH.
+  # Same contract as above; --locked builds against each crate's own lockfile.
+  home.activation.installCargoTools = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      # bin: an executable the crate installs. args: the crate source.
+      tools = [
+        { bin = "cargo-watch"; args = [ "cargo-watch" ]; }
+        { bin = "sqlx"; args = [ "sqlx-cli" ]; }
+        { bin = "rhwp"; args = [ "--git" "https://github.com/edwardkim/rhwp" "rhwp" ]; }
+      ];
+      installOne = t: ''
+        if [ ! -e "$HOME/.local/bin/${t.bin}" ]; then
+          run bash -c 'export PATH=/opt/homebrew/bin:$PATH; cargo install --locked --root "$HOME/.local" "$@"' _ ${lib.escapeShellArgs t.args} \
+            || warnEcho "cargo install ${lib.concatStringsSep " " t.args} failed. Rerun it by hand with --locked --root ~/.local"
         fi
       '';
     in
