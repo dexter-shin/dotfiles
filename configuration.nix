@@ -336,6 +336,7 @@
       "aws-vault-binary"
       "background-music"
       "betterdisplay"
+      "blackhole-2ch"
       "block-buzz"
       "block-goose"
       "chatgpt"
