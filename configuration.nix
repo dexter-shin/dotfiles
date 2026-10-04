@@ -427,7 +427,11 @@
       "tailscale-app"
       "telegram"
       "teleport-connect"
+      # JDKs, all pkg installs into /Library/Java/JavaVirtualMachines so
+      # /usr/libexec/java_home finds them: latest, 21 LTS and Zulu 17 (zulu@17
+      # below) for older Gradle builds.
       "temurin"
+      "temurin@21"
       "warrensbox/tap/tfswitch"
       "tidal"
       "transmission"
@@ -446,6 +450,7 @@
       "zcode"
       "zed"
       "zoom"
+      "zulu@17"
     ];
     # Mac App Store apps, keyed by display name. IDs come from `mas list`.
     # cleanup = "zap" never removes these, so drop an app by uninstalling it too.
