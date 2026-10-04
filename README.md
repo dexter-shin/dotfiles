@@ -126,6 +126,9 @@ programs.git = {
 That means every time you switch, Homebrew removes any package or cask on your machine that isn't listed in the `brews` and `casks` arrays in `configuration.nix`.
 If you already have Homebrew stuff installed that isn't in that list, the first switch will uninstall it.
 Read through `brews` and `casks` before you run `bootstrap.sh` or `rebuild.sh` for the first time, and add anything you want to keep.
+One exception: formulae from a third-party tap you never trusted are invisible to `brew leaves` and to cleanup, so they survive the switch without being declared. `brew info --installed` skips them too, so read the install receipts instead:
+`jq -r 'select(.installed_on_request and .source.tap != "homebrew/core") | "\(.source.tap)/\(input_filename | split("/")[-3])"' "$(brew --prefix)"/Cellar/*/*/INSTALL_RECEIPT.json | sort -u`.
+Declare the ones you want to keep as `user/tap/name`. A receipt keeps the tap name from install time, so a renamed tap (for example `koekeishiya/formulae`, now `asmvik/formulae`) has to be written under its new name.
 
 **About `herdr`:** it's in the `brews` list.
 It's a real public Homebrew formula (`brew info herdr` finds it in homebrew-core, no tap needed), so it will install fine.
