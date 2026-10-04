@@ -1,4 +1,0 @@
-2026-10-02T14:15:26.142708Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=75117
-2026-10-02T14:15:26.142748Z  INFO herdr::client: connecting to server path=/var/folders/jn/gpzhb8qj0sg2_7byybz80zdc0000gn/T/herdr-remote-74873-mini-dexter-0-fm-remote.sock
-2026-10-02T14:15:26.419653Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.3
-2026-10-02T14:16:04.944682Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=75117

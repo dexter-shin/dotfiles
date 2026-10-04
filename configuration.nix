@@ -35,6 +35,8 @@
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
+    # Write third-party tap formulae and casks as "user/tap/name". Homebrew only
+    # trusts fully qualified entries, and brew bundle refuses untrusted ones.
     taps = [
       "argoproj/tap"
       "asmvik/formulae"
@@ -354,7 +356,7 @@
       "tailscale-app"
       "telegram"
       "temurin"
-      "tfswitch"
+      "warrensbox/tap/tfswitch"
       "tidal"
       "transmission"
       "typeless"
