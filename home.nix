@@ -88,6 +88,9 @@ in
         # is the one most likely to need a rerun when that rate-limits.
         { bin = ".local/bin/treehouse"; cmd = "curl -fsSL https://kunchenguid.github.io/treehouse/install.sh | sh"; }
         { bin = ".no-mistakes/bin/no-mistakes"; cmd = "curl -fsSL https://raw.githubusercontent.com/kunchenguid/no-mistakes/main/docs/install.sh | sh"; }
+        # Notion CLI. Pinned to ~/.local/bin; it would otherwise pick the first
+        # writable PATH entry, which used to be /usr/local/bin.
+        { bin = ".local/bin/ntn"; cmd = "curl -fsSL https://ntn.dev | NTN_INSTALL_DIR=$HOME/.local/bin bash"; }
       ];
       installOne = t: ''
         if [ ! -e "$HOME/${t.bin}" ]; then
@@ -208,6 +211,8 @@ in
         { bin = "markitdown"; args = [ "markitdown" ]; }
         { bin = "ansible-playbook"; args = [ "ansible" "--with-executables-from" "ansible-core" ]; }
         { bin = "ansible-lint"; args = [ "ansible-lint" ]; }
+        # Python language server the editors use; ships its own Node runtime.
+        { bin = "basedpyright"; args = [ "basedpyright" ]; }
       ];
       installOne = t: ''
         if [ ! -e "$HOME/.local/bin/${t.bin}" ]; then
