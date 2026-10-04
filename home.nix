@@ -307,6 +307,25 @@ in
     lib.concatMapStrings installOne plugins
   );
 
+  # herdr plugins I installed by hand. They land in the linked
+  # home/.config/herdr/plugins (gitignored); config.toml binds their actions.
+  # Same contract as above: install only what is missing, never pin.
+  home.activation.installHerdrPlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      # id: the plugin_id. repo: its GitHub OWNER/REPO.
+      plugins = [
+        { id = "herdr-file-viewer"; repo = "smarzban/herdr-file-viewer"; } # prefix+f git-aware file viewer
+      ];
+      installOne = p: ''
+        if ! /opt/homebrew/bin/herdr plugin list 2>/dev/null | grep -q '^- ${p.id} '; then
+          run bash -c 'export PATH=/opt/homebrew/bin:/usr/bin:/bin:$PATH; herdr plugin install -y "$1"' _ ${lib.escapeShellArg p.repo} \
+            || warnEcho "herdr plugin install ${p.repo} failed. Rerun it by hand"
+        fi
+      '';
+    in
+    lib.concatMapStrings installOne plugins
+  );
+
   # VS Code extensions I installed by hand. Settings stay unmanaged: the live
   # settings.json holds API keys and this repo is public. Same contract as
   # above: install only what is missing, VS Code keeps them updated.
