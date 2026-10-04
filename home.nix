@@ -340,6 +340,11 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr";
   home.file.".config/ghostty/config".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty/config";
+  home.file.".config/kitty/kitty.conf".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/kitty/kitty.conf";
+  # Karabiner ignores edits to a symlinked karabiner.json, so link its whole directory.
+  home.file.".config/karabiner".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner";
   home.file.".tmux.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
   home.file.".claude/settings.json".source =

@@ -4,6 +4,9 @@ home/.config/herdr/session.json
 home/.config/herdr/**/*.sock
 home/.config/herdr/.plugins.lock
 
+# Karabiner writes timestamped backups next to karabiner.json
+home/.config/karabiner/automatic_backups/
+
 # local secrets, macOS + nix build noise
 .env
 .DS_Store
