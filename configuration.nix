@@ -49,6 +49,86 @@
       DSDontWriteNetworkStores = true;     # no .DS_Store on network shares
       DSDontWriteUSBStores = true;         # or on USB drives
     };
+    # English (ABC) + Korean 2-Set input, with the fn key starting dictation.
+    CustomUserPreferences."com.apple.HIToolbox" = {
+      AppleEnabledInputSources = [
+        { InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 252; "KeyboardLayout Name" = "ABC"; }
+        { "Bundle ID" = "com.apple.inputmethod.Korean"; "Input Mode" = "com.apple.inputmethod.Korean.2SetKorean"; InputSourceKind = "Input Mode"; }
+        { "Bundle ID" = "com.apple.inputmethod.Korean"; InputSourceKind = "Keyboard Input Method"; }
+        { "Bundle ID" = "com.apple.CharacterPaletteIM"; InputSourceKind = "Non Keyboard Input Method"; }
+        { "Bundle ID" = "com.apple.PressAndHold"; InputSourceKind = "Non Keyboard Input Method"; }
+        { "Bundle ID" = "com.apple.inputmethod.ironwood"; InputSourceKind = "Non Keyboard Input Method"; }
+      ];
+      AppleFnUsageType = 3;
+      AppleGlobalTextInputProperties.TextInputGlobalPropertyPerContextInput = true;
+    };
+    # Keyboard shortcuts. `defaults write` replaces the whole dictionary, so
+    # this is the full live set. The hand-changed ones:
+    # - 60/61: Cmd+Space and F18 switch input source. Karabiner maps Caps Lock
+    #   to F18, so Caps Lock toggles English/Korean.
+    # - 64/65: Spotlight shortcuts off, since Cmd+Space is the input switch.
+    # - 28-31, 184: built-in screenshot shortcuts off.
+    CustomUserPreferences."com.apple.symbolichotkeys".AppleSymbolicHotKeys =
+      let
+        key = enabled: parameters: { inherit enabled; value = { type = "standard"; inherit parameters; }; };
+        on = key true;
+        off = key false;
+      in {
+        "7" = on [ 65535 120 8650752 ];
+        "8" = on [ 65535 99 8650752 ];
+        "9" = on [ 65535 118 8650752 ];
+        "10" = on [ 65535 96 8650752 ];
+        "11" = on [ 65535 97 8650752 ];
+        "12" = on [ 65535 122 8650752 ];
+        "13" = on [ 65535 98 8650752 ];
+        "15" = { enabled = false; };
+        "16" = { enabled = false; };
+        "17" = { enabled = false; };
+        "18" = { enabled = false; };
+        "19" = { enabled = false; };
+        "20" = { enabled = false; };
+        "21" = off [ 56 28 1835008 ];
+        "22" = { enabled = false; };
+        "23" = { enabled = false; };
+        "24" = { enabled = false; };
+        "25" = off [ 46 47 1835008 ];
+        "26" = off [ 44 43 1835008 ];
+        "27" = on [ 96 50 1048576 ];
+        "28" = off [ 51 20 1179648 ];
+        "29" = off [ 51 20 1441792 ];
+        "30" = off [ 52 21 1179648 ];
+        "31" = off [ 52 21 1441792 ];
+        "32" = on [ 65535 126 8650752 ];
+        "33" = on [ 65535 125 8650752 ];
+        "34" = on [ 65535 126 8781824 ];
+        "35" = on [ 65535 125 8781824 ];
+        "36" = on [ 65535 103 8388608 ];
+        "37" = on [ 65535 103 8519680 ];
+        "52" = on [ 100 2 1572864 ];
+        "57" = on [ 65535 100 8650752 ];
+        "59" = on [ 65535 96 9437184 ];
+        "60" = on [ 32 49 1048576 ];
+        "61" = on [ 65535 79 8388608 ];
+        "64" = off [ 65535 49 262144 ];
+        "65" = off [ 65535 49 786432 ];
+        "79" = on [ 65535 123 8650752 ];
+        "80" = on [ 65535 123 8781824 ];
+        "81" = on [ 65535 124 8650752 ];
+        "82" = on [ 65535 124 8781824 ];
+        "98" = on [ 47 44 1179648 ];
+        "118" = off [ 65535 18 262144 ];
+        "119" = off [ 65535 19 262144 ];
+        "120" = off [ 65535 20 262144 ];
+        "160" = off [ 65535 65535 0 ];
+        "162" = on [ 65535 96 9961472 ];
+        "163" = off [ 65535 65535 0 ];
+        "164" = { enabled = true; value = { type = "modifier"; parameters = [ 8388608 4286578687 ]; }; };
+        "175" = on [ 65535 65535 0 ];
+        "176" = { enabled = false; value.type = "SAE1.0"; };
+        "179" = { enabled = false; };
+        "184" = off [ 53 23 1179648 ];
+        "190" = on [ 113 12 8388608 ];
+      };
   };
   nix-homebrew = {
     enable = true;

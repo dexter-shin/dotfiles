@@ -23,7 +23,7 @@ If you find a bug, please open a GitHub Issue using the bug report template.
 
 Running the switch builds:
 
-- System settings (dark mode, key repeat, no autocorrect, dock and hot corners, Finder, trackpad, screenshots, window tiling off, no .DS_Store on network/USB drives)
+- System settings (dark mode, key repeat, no autocorrect, dock and hot corners, Finder, trackpad, screenshots, window tiling off, no .DS_Store on network/USB drives), plus English/Korean 2-Set input sources and the keyboard shortcuts: Cmd+Space or F18 (Caps Lock through Karabiner) switches input, Spotlight and the built-in screenshot shortcuts are off
 - Homebrew apps (casks and CLI tools), fonts (Korean and Nerd Fonts) and Mac App Store apps. When an app from `casks` is already in `/Applications`, or a font file is already in `~/Library/Fonts`, `brew bundle --force` replaces it with the cask's current version, even if the existing copy is older; app data in `~/Library` is kept. Apps that ship as a `.pkg` (Zoom, Microsoft Office, Karabiner-Elements, Tailscale, Google Drive and others) run their installer again over the existing app and ask for your password. JDKs come the same way: Temurin (latest), Temurin 21 and Zulu 17, all visible to `/usr/libexec/java_home`
 - The Ollama server, started at login as a Homebrew service (`start_service`), so local models are served without a manual `brew services start ollama`
 - The NetBird client daemon as a system LaunchDaemon (`launchd.daemons.netbird`), with the same label and arguments `sudo netbird service install` writes, so `netbird up` works without installing the service by hand. The first switch reloads the running daemon once
