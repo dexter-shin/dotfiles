@@ -21,6 +21,10 @@ in
   ];
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
+  # The one non-default ghorg setting from my hand-written
+  # ~/.config/ghorg/conf.yaml, which stays out of the repo because it holds
+  # tokens: keep GitLab group/subgroup paths when cloning.
+  home.sessionVariables.GHORG_PRESERVE_DIRECTORY_STRUCTURE = "true";
 
   # omp installs itself in .local; Kimi Code in .kimi-code; Grok in .grok;
   # `go install` in ~/go/bin; krew plugins in ~/.krew/bin, where kubectl
