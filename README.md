@@ -37,6 +37,7 @@ Running the switch builds:
 - Ghostty config (D2Coding Nerd Font, Catppuccin theme that follows system dark mode, quick terminal on Cmd+`)
 - kitty config (D2Coding Nerd Font tuned for Korean, Tokyo Night colors, split keymaps)
 - Karabiner-Elements config (Caps Lock -> F18, Esc -> international1 on one external keyboard)
+- yabai, skhd and sketchybar configs (bsp tiling with float rules, vim-style alt/shift focus, swap and resize keys, a minimal status bar). Homebrew installs the tools, but none of them start until you run `yabai --start-service`, `skhd --start-service` or `brew services start sketchybar`
 - tmux config (Ctrl-Space prefix, catppuccin, resurrect/continuum session restore). TPM comes from Homebrew, and the first tmux start installs the plugins
 - Agent configs (Claude, Codex, opencode all share one AGENTS.md)
 - Optional Pi theme and local extensions, generic UI settings and model overrides, plus two deliberately pinned third-party Pi packages

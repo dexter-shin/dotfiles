@@ -345,6 +345,13 @@ in
   # Karabiner ignores edits to a symlinked karabiner.json, so link its whole directory.
   home.file.".config/karabiner".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner";
+  # yabai's signals run the helper scripts next to yabairc, so link the whole directory.
+  home.file.".config/yabai".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/yabai";
+  home.file.".config/skhd/skhdrc".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/skhd/skhdrc";
+  home.file.".config/sketchybar".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/sketchybar";
   home.file.".tmux.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
   home.file.".claude/settings.json".source =
