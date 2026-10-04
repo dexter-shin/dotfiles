@@ -319,12 +319,11 @@
       "zoxide"
       "zrok"
     ];
-    # brew bundle passes --adopt, so a hand-installed app already in /Applications
-    # gets taken over in place. Adoption only works when the cask auto-updates or its
-    # version matches the installed app, otherwise the cask install fails.
-    # Fonts in ~/Library/Fonts are adopted only when the file is byte-identical.
-    # pkg-based casks (zoom, microsoft-*, karabiner-elements, ...) have nothing to
-    # adopt: their installer runs again over the existing app and asks for sudo.
+    # extraFlags "--force" makes brew bundle install casks with --force instead of
+    # --adopt, so a hand-installed app in /Applications or a font in ~/Library/Fonts
+    # is replaced by the cask's current version, even when versions or bytes differ.
+    # App data in ~/Library is untouched. pkg-based casks (zoom, microsoft-*,
+    # karabiner-elements, ...) run their installer again and ask for sudo.
     casks = [
       "1password"
       "1password-cli"
@@ -337,6 +336,8 @@
       "aws-vault-binary"
       "background-music"
       "betterdisplay"
+      "block-buzz"
+      "block-goose"
       "chatgpt"
       "claude"
       "claude-code"
@@ -353,6 +354,7 @@
       "elgato-stream-deck"
       "figma"
       "font-azonix"
+      "font-black-han-sans"
       "font-d2coding-nerd-font"
       "font-fira-code"
       "font-gmarket-sans"
@@ -362,6 +364,8 @@
       "font-nanum-square"
       "font-nanum-square-neo"
       "font-nanum-square-round"
+      "font-pretendard"
+      "font-sketchybar-app-font"
       "font-space-grotesk"
       "freelens"
       "gcloud-cli"
@@ -379,6 +383,7 @@
       "iterm2"
       "itermai"
       "karabiner-elements"
+      "kimi"
       "kitty"
       "libreoffice"
       "linear"
@@ -386,6 +391,7 @@
       "loom"
       "maccy"
       "macfuse"
+      "mattermost"
       "microsoft-excel"
       "microsoft-powerpoint"
       "microsoft-word"
@@ -401,13 +407,17 @@
       "openlens"
       "orbstack"
       "orca"
+      "palmier-pro"
       "paper-design"
       "parallels@20"
       "philips-hue-sync"
+      "plaud"
       "raycast"
+      "recordly"
       "screen-studio"
       "screenflow"
       "sf-symbols"
+      "shearwater-cloud"
       "shottr"
       "slack"
       "slack-cli"
@@ -415,6 +425,7 @@
       "superwhisper"
       "tailscale-app"
       "telegram"
+      "teleport-connect"
       "temurin"
       "warrensbox/tap/tfswitch"
       "tidal"
@@ -427,7 +438,9 @@
       "warp"
       "webstorm"
       "wezterm"
+      "winbox"
       "wispr-flow"
+      "xmind"
       "yes24-ebook"
       "zcode"
       "zed"
