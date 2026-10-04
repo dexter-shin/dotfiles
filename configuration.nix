@@ -234,7 +234,11 @@
       "netbirdio/tap/netbird"
       "nixpacks"
       "node"
-      "ollama"
+      # Runs `ollama serve` as a login LaunchAgent, as `brew services start` did.
+      {
+        name = "ollama";
+        start_service = true;
+      }
       "openjdk"
       "openjdk@17"
       "opentofu"

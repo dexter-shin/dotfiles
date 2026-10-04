@@ -25,6 +25,7 @@ Running the switch builds:
 
 - System settings (dark mode, key repeat, no autocorrect, dock and hot corners, Finder, trackpad, screenshots, window tiling off, no .DS_Store on network/USB drives)
 - Homebrew apps (casks and CLI tools), fonts (Korean and Nerd Fonts) and Mac App Store apps. When an app from `casks` is already in `/Applications`, or an identical font file is already in `~/Library/Fonts`, `brew bundle` adopts it instead of installing it again. Apps that ship as a `.pkg` (Zoom, Microsoft Office, Karabiner-Elements, Tailscale, Google Drive and others) can't be adopted, so their installer runs again over the existing app and asks for your password
+- The Ollama server, started at login as a Homebrew service (`start_service`), so local models are served without a manual `brew services start ollama`
 - Nix user packages (ripgrep, fd, fzf, jq, lazygit, Neovim, Hack Nerd Font)
 - Global npm CLIs (agent CLIs, *-axi tools, Pi extensions, language servers, plus zg, ocx and omo that once lived only under nvm), installed once into Homebrew Node if missing and never pinned
 - Python CLIs (serena, chunkhound, headroom, markitdown, ansible, basedpyright and more) through `uv tool install`, installed once if missing and never pinned
