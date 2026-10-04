@@ -29,6 +29,7 @@ Running the switch builds:
 - Global npm CLIs (agent CLIs, *-axi tools, Pi extensions, language servers), installed once if missing and never pinned
 - Python CLIs (serena, chunkhound, headroom, markitdown, ansible and more) through `uv tool install`, installed once if missing and never pinned
 - Go CLIs (gopls, dlv, staticcheck and the other Go editor tools, actionlint, songsee) through `go install`, and Rust CLIs (cargo-watch, sqlx-cli, rhwp) through `cargo install`, installed once if missing and never pinned
+- kubectl plugins (access-matrix, konfig, neat, slice) through Homebrew's krew, installed once if missing, with `~/.krew/bin` on PATH so `kubectl <plugin>` finds them
 - Agent and dev CLIs that ship their own curl installer (goose, cursor-agent, herdr, ak, gjc, plannotator, treehouse, no-mistakes), installed once if missing and never pinned
 - Shell (zsh, aliases, starship prompt)
 - Editor (Neovim config with the rose-pine moon theme)

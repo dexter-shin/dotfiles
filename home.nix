@@ -23,8 +23,9 @@ in
   home.sessionVariables.EDITOR = "nvim";
 
   # omp installs itself in .local; Kimi Code in .kimi-code; Grok in .grok;
-  # `go install` in ~/go/bin.
-  home.sessionPath = [ "$HOME/.local/bin" "$HOME/.kimi-code/bin" "$HOME/.grok/bin" "$HOME/go/bin" ];
+  # `go install` in ~/go/bin; krew plugins in ~/.krew/bin, where kubectl
+  # finds them as `kubectl <plugin>`.
+  home.sessionPath = [ "$HOME/.local/bin" "$HOME/.kimi-code/bin" "$HOME/.grok/bin" "$HOME/go/bin" "$HOME/.krew/bin" ];
 
   # Neither agent CLI is in Nixpkgs or Homebrew. Pi is published on npm only;
   # omp ships a prebuilt binary from its own installer and its npm package
@@ -267,6 +268,28 @@ in
       '';
     in
     lib.concatMapStrings installOne tools
+  );
+
+  # kubectl plugins I installed by hand with krew (Homebrew's krew formula).
+  # ctx and ns are left out: Homebrew's kubectx already ships kubectl-ctx and
+  # kubectl-ns. Same contract as above: install only what is missing, never
+  # pin, upgrade with `kubectl krew upgrade`.
+  home.activation.installKrewPlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      plugins = [
+        "access-matrix" # kubectl access-matrix: RBAC overview
+        "konfig"        # merge and split kubeconfigs
+        "neat"          # strip clutter from `kubectl get -o yaml`
+        "slice"         # split multi-document YAML into files
+      ];
+      installOne = p: ''
+        if [ ! -e "$HOME/.krew/receipts/${p}.yaml" ]; then
+          run bash -c 'export PATH=/opt/homebrew/bin:/usr/bin:$PATH; kubectl-krew install "$1"' _ ${lib.escapeShellArg p} \
+            || warnEcho "kubectl krew install ${p} failed. Rerun it by hand"
+        fi
+      '';
+    in
+    lib.concatMapStrings installOne plugins
   );
 
   programs.zsh = {
