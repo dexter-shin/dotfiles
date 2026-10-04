@@ -152,6 +152,40 @@ in
     ''
   );
 
+  # Python CLIs I installed by hand with uv or pipx. All go through
+  # `uv tool install` now, so one tool owns every Python CLI. Same contract as
+  # the npm globals: guarded on the CLI's executable in ~/.local/bin (so the
+  # existing pipx installs count as present), never pinned, upgraded with
+  # `uv tool upgrade --all`.
+  home.activation.installUvTools = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      # bin: the executable whose presence means the tool is installed.
+      # args: the full `uv tool install` arguments.
+      tools = [
+        { bin = "chunkhound"; args = [ "chunkhound" ]; }
+        { bin = "claude-monitor"; args = [ "claude-monitor" ]; }
+        { bin = "graphify"; args = [ "graphifyy" ]; }
+        { bin = "it2"; args = [ "it2" ]; }
+        { bin = "nlm"; args = [ "notebooklm-mcp-cli" ]; }
+        { bin = "ouroboros"; args = [ "ouroboros-ai[tui]" ]; }
+        { bin = "serena"; args = [ "serena-agent @ git+https://github.com/oraios/serena" ]; }
+        { bin = "trafilatura"; args = [ "trafilatura" ]; }
+        { bin = "headroom"; args = [ "headroom-ai[all]" ]; }
+        { bin = "hyperresearch"; args = [ "hyperresearch" ]; }
+        { bin = "markitdown"; args = [ "markitdown" ]; }
+        { bin = "ansible-playbook"; args = [ "ansible" "--with-executables-from" "ansible-core" ]; }
+        { bin = "ansible-lint"; args = [ "ansible-lint" ]; }
+      ];
+      installOne = t: ''
+        if [ ! -e "$HOME/.local/bin/${t.bin}" ]; then
+          run bash -c 'export PATH=/opt/homebrew/bin:$PATH; uv tool install "$@"' _ ${lib.escapeShellArgs t.args} \
+            || warnEcho "uv tool install ${lib.concatStringsSep " " t.args} failed. Rerun it by hand"
+        fi
+      '';
+    in
+    lib.concatMapStrings installOne tools
+  );
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;      # ghost text from history
