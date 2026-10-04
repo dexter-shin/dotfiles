@@ -66,6 +66,92 @@ in
     fi
   '';
 
+  # Global npm CLIs I installed by hand over time: agent CLIs, *-axi tools,
+  # Pi extensions and language servers. Same contract as Pi above: install
+  # only what is missing, never pin, upgrade through npm itself. Each package
+  # installs on its own so one broken publish does not block the rest.
+  home.activation.installNpmGlobals = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      packages = [
+        # agent CLIs and adapters
+        "@openai/codex"
+        "@google/gemini-cli"
+        "opencode-ai"
+        "opencode-anthropic-oauth"
+        "oh-my-opencode"
+        "oh-my-claude-sisyphus"
+        "@agentclientprotocol/claude-agent-acp"
+        "@zed-industries/codex-acp"
+        "acpx"
+        "@nex-ai/nex"
+        "claudekit-cli"
+        "context-mode"
+        "headroom-ai"
+        "gnhf"
+        "backpass"
+        # agent-ergonomic CLI wrappers
+        "chrome-devtools-axi"
+        "cloudflare-axi"
+        "coolify-axi"
+        "gh-axi"
+        "glab-axi"
+        "gws-axi"
+        "jev-axi"
+        "lavish-axi"
+        "mobbin-axi"
+        "notion-axi"
+        "quota-axi"
+        "slack-axi"
+        "tasks-axi"
+        # Pi extensions installed outside settings.json packages
+        "@juicesharp/rpiv-advisor"
+        "@juicesharp/rpiv-args"
+        "@juicesharp/rpiv-ask-user-question"
+        "@juicesharp/rpiv-i18n"
+        "@juicesharp/rpiv-pi"
+        "@juicesharp/rpiv-todo"
+        "@juicesharp/rpiv-web-tools"
+        "@plannotator/pi-extension"
+        "@tintinweb/pi-subagents"
+        "pi-agent-browser-native"
+        "pi-btw"
+        "pi-caveman"
+        "pi-hermes-memory"
+        "pi-interactive-shell"
+        "pi-mcp-adapter"
+        "pi-simplify"
+        "pi-studio"
+        # documents and media
+        "@googleworkspace/cli"
+        "@n8n-as-code/transformer"
+        "asciicast2gif"
+        "designlang"
+        "grok-image-cli"
+        "k-skill-rhwp"
+        "kordoc"
+        "md-to-pdf"
+        "pdfjs-dist"
+        # dev tooling and language servers
+        "@ast-grep/cli"
+        "bash-language-server"
+        "yaml-language-server"
+        "typescript"
+        "ts-node"
+        "ts-morph"
+        "gulp-cli"
+        "vercel"
+      ];
+    in
+    ''
+      for pkg in ${lib.escapeShellArgs packages}; do
+        if [ ! -e "/opt/homebrew/lib/node_modules/$pkg" ]; then
+          run bash -c 'export PATH=/opt/homebrew/bin:$PATH; npm install -g "$1"' _ "$pkg" \
+            || warnEcho "npm install of $pkg failed. Rerun by hand: npm install -g $pkg"
+        fi
+      done
+    ''
+  );
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;      # ghost text from history
