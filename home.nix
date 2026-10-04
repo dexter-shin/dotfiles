@@ -347,12 +347,19 @@ in
     # `z` jumps (zoxide), Ctrl-R/Ctrl-T/Alt-C (fzf) and per-directory .envrc
     # loading (direnv). The binaries are the declared Homebrew zoxide/direnv
     # formulae and the fzf in home.packages.
-    initContent = ''
-      bindkey '^f' autosuggest-accept
-      eval "$(zoxide init zsh)"
-      source <(fzf --zsh)
-      eval "$(direnv hook zsh)"
-    '';
+    initContent = lib.mkMerge [
+      # Grok's installer refreshes its completion file here on every update;
+      # fpath has to grow before compinit (order 570) or `grok <Tab>` finds nothing.
+      (lib.mkOrder 550 ''
+        fpath=("$HOME/.grok/completions/zsh" $fpath)
+      '')
+      ''
+        bindkey '^f' autosuggest-accept
+        eval "$(zoxide init zsh)"
+        source <(fzf --zsh)
+        eval "$(direnv hook zsh)"
+      ''
+    ];
     # The lines OrbStack and Obsidian append to ~/.zprofile on first launch,
     # kept verbatim so the apps see them and don't try to rewrite this file.
     # Both append to PATH: OrbStack's docker CLI lives only in ~/.orbstack/bin
@@ -373,6 +380,21 @@ in
       m = "git switch main";
       cc = "claude --dangerously-skip-permissions";
       co = "codex --full-auto";
+      # Carried over from the hand-written .zshrc; each target is declared.
+      c = "clear";
+      n = "nvim";
+      s = "source ~/.zshrc";
+      g = "gt";
+      k = "kubectl";
+      kx = "kubectx";
+      dc = "docker-compose";
+      tl = "tmux ls";
+      ts = "tmux source-file ~/.tmux.conf";
+      whatsmyip = "dig +short txt ch whoami.cloudflare @1.0.0.1";
+      cclaude = "headroom wrap claude --dangerously-skip-permissions";
+      ggmini = "gemini --yolo";
+      fabric = "fabric-ai";
+      omc = "omc --dangerously-skip-permissions";
     };
   };
 
