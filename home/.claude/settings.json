@@ -231,5 +231,114 @@
     "command": "input=$(cat); model=$(echo \"$input\" | jq -r '.model.display_name'); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); if [ -n \"$used\" ]; then printf \"%s | ctx: %.0f%% used\" \"$model\" \"$used\"; else printf \"%s\" \"$model\"; fi"
   },
   "skipDangerousModePermissionPrompt": true,
-  "theme": "dark-ansi"
+  "theme": "dark-ansi",
+  "enabledPlugins": {
+    "autoresearch@autoresearch": true,
+    "claude-code-setup@claude-plugins-official": false,
+    "claude-md-management@claude-plugins-official": false,
+    "claude-mem@thedotmack": true,
+    "code-simplifier@claude-plugins-official": false,
+    "codex@openai-codex": true,
+    "commit-commands@claude-plugins-official": false,
+    "compound-engineering@compound-engineering-plugin": false,
+    "context7@claude-plugins-official": false,
+    "fablize@fablize": true,
+    "insane-research@gptaku-plugins": false,
+    "insane-search@gptaku-plugins": false,
+    "knowledge-catalog@claude-plugins-official": false,
+    "pmo-claude-common@infograb-pmo": true,
+    "ponytail@ponytail": true,
+    "railway@claude-plugins-official": true,
+    "recall@recall": true,
+    "skill-creator@claude-plugins-official": false,
+    "superpowers@claude-plugins-official": true,
+    "understand-anything@understand-anything": true,
+    "claude-otel-kit@infograb-platform": true
+  },
+  "extraKnownMarketplaces": {
+    "addy-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "addyosmani/agent-skills"
+      }
+    },
+    "autoresearch": {
+      "source": {
+        "source": "github",
+        "repo": "uditgoenka/autoresearch"
+      }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "compound-engineering-plugin": {
+      "source": {
+        "source": "github",
+        "repo": "EveryInc/compound-engineering-plugin"
+      }
+    },
+    "diagram-design": {
+      "source": {
+        "source": "github",
+        "repo": "cathrynlavery/diagram-design"
+      }
+    },
+    "fablize": {
+      "source": {
+        "source": "github",
+        "repo": "fivetaku/fablize"
+      }
+    },
+    "gptaku-plugins": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/fivetaku/gptaku_plugins.git"
+      }
+    },
+    "infograb-pmo": {
+      "source": {
+        "source": "git",
+        "url": "https://gitlab.com/infograb/pmo/pmo-claude-marketplace.git"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "recall": {
+      "source": {
+        "source": "github",
+        "repo": "raiyanyahya/recall"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    },
+    "understand-anything": {
+      "source": {
+        "source": "github",
+        "repo": "Lum1104/Understand-Anything"
+      }
+    },
+    "infograb-platform": {
+      "source": {
+        "source": "git",
+        "url": "https://gitlab.com/infograb/platform/infograb-otel-kit.git"
+      }
+    }
+  }
 }
