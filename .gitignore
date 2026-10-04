@@ -20,6 +20,9 @@ result-*
 # Pi Calm is a runtime toggle; its local state file is never tracked
 /home/.pi/agent/calm
 
+# TerminalGraph.app installs its own unlicensed Pi integration here; keep vendor code out of the public repo
+/home/.pi/agent/extensions/terminalgraph/
+
 # no-mistakes local validation state - never commit in this public repo
 .no-mistakes/
 
