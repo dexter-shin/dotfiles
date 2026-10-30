@@ -19,7 +19,7 @@
     # every `brew bundle` fails, so pin Homebrew forward ourselves.
     # Fetched over git rather than `github:` so it does not burn the
     # unauthenticated GitHub API rate limit on every lock update.
-    brew-src.url = "git+https://github.com/Homebrew/brew.git?ref=refs/tags/7.0.4&shallow=1";
+    brew-src.url = "git+https://github.com/Homebrew/brew.git?ref=refs/tags/7.0.11&shallow=1";
     brew-src.flake = false;
     nix-homebrew.inputs.brew-src.follows = "brew-src";
   };
