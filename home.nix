@@ -25,6 +25,8 @@ in
   # ~/.config/ghorg/conf.yaml, which stays out of the repo because it holds
   # tokens: keep GitLab group/subgroup paths when cloning.
   home.sessionVariables.GHORG_PRESERVE_DIRECTORY_STRUCTURE = "true";
+  # Where the ig-design-system-pointer skill finds the design system repo.
+  home.sessionVariables.IG_DESIGN_SYSTEM_ROOT = "/Users/dex/github/dexter-shin/firstmate/projects/ig-design-system";
 
   # omp installs itself in .local; Kimi Code in .kimi-code; Grok in .grok;
   # `go install` in ~/go/bin; krew plugins in ~/.krew/bin, where kubectl
